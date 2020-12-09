@@ -69,6 +69,7 @@ function appStart() {
         })
 };
 
+//Inquirer tree which narrows down what type of info the user wishes to add to the database
 function add() {
     inquirer
         .prompt([
@@ -110,6 +111,7 @@ function add() {
         });
 };
 
+//Inquirer tree which narrows down what type of information the user wishes to view
 function view() {
     inquirer
         .prompt([
@@ -151,6 +153,7 @@ function view() {
         });
 };
 
+//Inquirer tree which narrows down what type of information the user wishes to update
 function update() {
     inquirer
         .prompt([
