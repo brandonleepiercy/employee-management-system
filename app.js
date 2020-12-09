@@ -22,10 +22,11 @@ connection.connect((err) => {
 
     //Building the splash text
     figlet('Employee Management System', (err,result) => {
-        console.log(err || result);
+        console.log(err || result+"\n");
         console.log("----------------------------------------------\n");
-        console.log("Built by Brandon Lee Piercy, 2020");
-        console.log("github.com/brandonleepiercy");
+        console.log("Built by Brandon Lee Piercy, 2020\n");
+        console.log("github.com/brandonleepiercy\n");
+        console.log("Using Inquirer, MySQL, Figlet, Node Package Manager and JavaScript \n")
         console.log("----------------------------------------------\n");
         appStart();
     });
@@ -194,3 +195,15 @@ function update() {
             }
         });
 };
+
+function addDeparment() {};
+function addRole() {};
+function addEmployee() {};
+
+function viewDeparment() {};
+function viewRole() {};
+function viewEmployee() {};
+
+function updateDeparment() {};
+function updateRole() {};
+function updateEmployee() {};
