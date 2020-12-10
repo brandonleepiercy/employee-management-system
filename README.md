@@ -16,11 +16,19 @@ The Employee Management System app is a Command Line Interface application runni
 
 ## Installation
 
-Type "npm install" into CMD to install the neccesary packages for this repository.
+First step is to set up the MySQL server, using the schema.sql file provided within the repository.
+Copy and paste the contents of the schema.sql file into an instance of MySQL Workbench and create the database on your machine.
+Note: port, host, user, and password settings may all have to be adjusted
+
+After creating the MySQL database, use terminal to navigate into the repo directory. Type "npm install" into CMD to install the neccesary node packages for this repository.
+
+Once the node modules are installed and the SQL settings are configured, the user can type "node app.js" into the terminal to launch the program.
 
 ## Usage
 
 Updating and maintaining a MySQL database which is structured to store data about employees, roles and departments within an organization. The program keeps track of IDs, salaries, names and more.
+
+Future releases will add the ability to delete items from database, dynamically total the salary expense per department, or for the whole organization.
 
 ## Credits
 
