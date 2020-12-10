@@ -24,6 +24,8 @@ After creating the MySQL database, use terminal to navigate into the repo direct
 
 Once the node modules are installed and the SQL settings are configured, the user can type "node app.js" into the terminal to launch the program.
 
+[INSTALL AND USAGE GUIDE](https://www.youtube.com/watch?v=efNXgMg6SPA&feature=youtu.be)
+
 ## Usage
 
 Updating and maintaining a MySQL database which is structured to store data about employees, roles and departments within an organization. The program keeps track of IDs, salaries, names and more.
