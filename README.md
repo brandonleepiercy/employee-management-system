@@ -18,7 +18,7 @@ The Employee Management System app is a Command Line Interface application runni
 
 First step is to set up the MySQL server, using the schema.sql file provided within the repository.
 Copy and paste the contents of the schema.sql file into an instance of MySQL Workbench and create the database on your machine.
-Note: port, host, user, and password settings may all have to be adjusted
+Note: port, host, user, and password settings may all have to be adjusted.
 
 After creating the MySQL database, use terminal to navigate into the repo directory. Type "npm install" into CMD to install the neccesary node packages for this repository.
 
