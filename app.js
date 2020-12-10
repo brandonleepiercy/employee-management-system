@@ -197,8 +197,9 @@ function update() {
 };
 
 //ADD FUNCTIONS
-//add department
+//Add department
 function addDeparment() {
+    //Inquirer to get department details
     inquirer
         .prompt([
             {
@@ -212,6 +213,7 @@ function addDeparment() {
                 message:'Enter an ID number for the new department:'
             }
         ]).then(answers => {
+            //Generate department
             connection.query(
                 `INSERT INTO department (id, name) VALUES (${answers.deptid}, '${answers.ndept}');`,
                 function (err) {
@@ -223,8 +225,9 @@ function addDeparment() {
             );
         });
 };
-//add role
+//Add role
 function addRole() {
+    //Inquirer to get role details
     inquirer
         .prompt([
             {
@@ -248,6 +251,7 @@ function addRole() {
                 message:'Enter the department ID associated with the new role:'
             }
         ]).then(answers => {
+            //Generate role
             connection.query(
                 `INSERT INTO role (id, title, salary, department_id) VALUES (${answers.roleid}, '${answers.nrole}', ${answers.rolesalary}, ${answers.deptid});`,
                 function (err) {
@@ -259,8 +263,9 @@ function addRole() {
             );
         });
 };
-//add employee
+//Add employee
 function addEmployee() {
+    //Inquirer to get employee details
     inquirer
     .prompt([
         {
@@ -289,6 +294,7 @@ function addEmployee() {
             message:'Enter the manager ID of the manager for the new employee (enter 0 for no manager):'
         }
     ]).then(answers => {
+        //Generate employee
         connection.query(
             `INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES (${answers.empid}, '${answers.firstname}', '${answers.lastname}', ${answers.roleid}, ${answers.managerid});`,
             function (err) {
@@ -301,7 +307,10 @@ function addEmployee() {
     });
 };
 
+//VIEW FUNCTIONS
+//View department
 function viewDeparment() {
+    //Connection query to pull department details
     connection.query(
         `SELECT * FROM department;`,
         function (err, results) {
@@ -315,7 +324,10 @@ function viewDeparment() {
         }
     )
 };
+
+//View role
 function viewRole() {
+    //Connection query to pull role details
     connection.query(
         `SELECT * FROM role;`,
         function (err, results) {
@@ -331,7 +343,10 @@ function viewRole() {
         }
     );
 };
+
+//View employee
 function viewEmployee() {
+    //Connection query to pull employee details
     connection.query(
         `SELECT * FROM employee;`,
         function (err, results) {
@@ -348,7 +363,10 @@ function viewEmployee() {
     );
 };
 
+//UPDATE FUNCTIONS
+//Update department
 function updateDeparment() {
+    //Connection query to get the names of the current departments in order to dynamically generate the inquirer prompt
     connection.query(
         `SELECT name FROM department;`,
         function (err, results) {
@@ -357,6 +375,7 @@ function updateDeparment() {
             for (i=0; i<results.length; i++) {
                 choiceArray.push(results[i].name);
             }
+            //Inquirer to narrow down what value to replace in the table
             inquirer
                 .prompt([
                     {
@@ -377,6 +396,7 @@ function updateDeparment() {
                         message:"What would you like to change it to?:"
                     }
                 ]).then(answers => {
+                    //Updating the selected value in the table
                     connection.query(
                         `UPDATE department SET ${answers.coltochange} = '${answers.newval}' WHERE name = '${answers.choice}'`,
                         function (err) {
@@ -390,6 +410,7 @@ function updateDeparment() {
     )
 };
 
+//Update role
 function updateRole() {
     connection.query(
         `SELECT title FROM role;`,
@@ -431,6 +452,8 @@ function updateRole() {
         }
     )
 };
+
+//Update employee
 function updateEmployee() {
     connection.query(
         `SELECT id FROM employee;`,
