@@ -433,29 +433,26 @@ function updateRole() {
 };
 function updateEmployee() {
     connection.query(
-        `SELECT * FROM department;`,
+        `SELECT id FROM employee;`,
         function (err, results) {
             if (err) throw err;
             choiceArray = [];
             for (i=0; i<results.length; i++) {
-                var nameString = "";
-                nameString += results[i].first_name;
-                nameString += results[i].last_name;
-                choiceArray.push(nameString);
+                choiceArray.push(results[i].id);
             }
             inquirer
                 .prompt([
                     {
                         type:"list",
                         name:"choice",
-                        message:"Which department would you like to update?",
+                        message:"Which employee would you like to update? (This is a list of employee ID numbers)",
                         choices:choiceArray
                     },
                     {
                         type:"list",
                         name:"coltochange",
-                        message:"Would you like to edit the index or the name?",
-                        choices:["id","name"]
+                        message:"What would you like to edit?",
+                        choices:["id","first_name", "last_name", "role_id", "manager_id"]
                     },
                     {
                         type:"input",
@@ -464,10 +461,10 @@ function updateEmployee() {
                     }
                 ]).then(answers => {
                     connection.query(
-                        `UPDATE department SET ${answers.coltochange} = '${answers.newval}' WHERE name = '${answers.choice}'`,
+                        `UPDATE employee SET ${answers.coltochange} = '${answers.newval}' WHERE id = '${answers.choice}'`,
                         function (err) {
                             if (err) throw err;
-                            console.log(`Department updated successfully`);
+                            console.log(`Employee ID: ${answers.choice} updated successfully`);
                             appStart();
                         }
                     )
