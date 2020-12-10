@@ -196,13 +196,157 @@ function update() {
         });
 };
 
-function addDeparment() {};
-function addRole() {};
-function addEmployee() {};
+//ADD FUNCTIONS
+//add department
+function addDeparment() {
+    inquirer
+        .prompt([
+            {
+                type:'input',
+                name:'ndept',
+                message:'Enter the name of the department:'
+            },
+            {
+                type:'input',
+                name:'deptid',
+                message:'Enter an ID number for the new department:'
+            }
+        ]).then(answers => {
+            connection.query(
+                `INSERT INTO department (id, name) VALUES (${answers.deptid}, '${answers.ndept}');`,
+                function (err) {
+                    if (err) throw err;
+                    console.log(`Department ${answers.ndept} stored in the database successfully\n`);
+                    console.log("---------------------------------------------\n");
+                    appStart();
+                }
+            );
+        });
+};
+//add role
+function addRole() {
+    inquirer
+        .prompt([
+            {
+                type:'input',
+                name:'nrole',
+                message:'Enter the title of the role:'
+            },
+            {
+                type:'input',
+                name:'roleid',
+                message:'Enter an ID number for the new role:'
+            },
+            {
+                type:'input',
+                name:'rolesalary',
+                message:'Enter the salary for the new role:'
+            },
+            {
+                type:'input',
+                name:'deptid',
+                message:'Enter the department ID associated with the new role:'
+            }
+        ]).then(answers => {
+            connection.query(
+                `INSERT INTO role (id, title, salary, department_id) VALUES (${answers.roleid}, '${answers.nrole}', ${answers.rolesalary}, ${answers.deptid});`,
+                function (err) {
+                    if (err) throw err;
+                    console.log(`Role: ${answers.nrole}, salary: ${answers.rolesalary}, dept-id: ${answers.deptid} stored in the database successfully\n`);
+                    console.log("---------------------------------------------\n");
+                    appStart();
+                }
+            );
+        });
+};
+//add employee
+function addEmployee() {
+    inquirer
+    .prompt([
+        {
+            type:'input',
+            name:'empid',
+            message:'Enter the ID number of the employee:'
+        },
+        {
+            type:'input',
+            name:'firstname',
+            message:'Enter the first name of the employee:'
+        },
+        {
+            type:'input',
+            name:'lastname',
+            message:'Enter the last name of the employee:'
+        },
+        {
+            type:'input',
+            name:'roleid',
+            message:'Enter the role ID of the employee'
+        },
+        {
+            type:'input',
+            name:'managerid',
+            message:'Enter the manager ID of the manager for the new employee (enter 0 for no manager):'
+        }
+    ]).then(answers => {
+        connection.query(
+            `INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES (${answers.empid}, '${answers.firstname}', '${answers.lastname}', ${answers.roleid}, ${answers.managerid});`,
+            function (err) {
+                if (err) throw err;
+                console.log(`Employee ${answers.firstname} ${answers.lastname} stored in the database successfully\n`);
+                console.log(`---------------------------------------------\n`);
+                appStart();
+            }
+        );
+    });
+};
 
-function viewDeparment() {};
-function viewRole() {};
-function viewEmployee() {};
+function viewDeparment() {
+    connection.query(
+        `SELECT * FROM department;`,
+        function (err, results) {
+            if (err) throw err;
+            for (i=0; i<results.length; i++) {
+                console.log(`ID: ${results[i].id} \n`);
+                console.log(`Name: ${results[i].name} \n`);
+                console.log(`---------------------------------------------\n`);
+            }
+            appStart();
+        }
+    )
+};
+function viewRole() {
+    connection.query(
+        `SELECT * FROM role;`,
+        function (err, results) {
+            if (err) throw err;
+            for (i=0; i<results.length; i++) {
+                console.log(`ID: ${results[i].id} \n`);
+                console.log(`Title: ${results[i].title} \n`);
+                console.log(`Salary: ${results[i].salary} \n`);
+                console.log(`Department ID: ${results[i].department_id} \n`);
+                console.log(`---------------------------------------------\n`);
+            }
+            appStart();
+        }
+    );
+};
+function viewEmployee() {
+    connection.query(
+        `SELECT * FROM employee;`,
+        function (err, results) {
+            if (err) throw err;
+            for (i=0; i<results.length; i++) {
+                console.log(`ID: ${results[i].id} \n`);
+                console.log(`Name: ${results[i].first_name} ${results[i].last_name} \n`);
+                console.log(`Role ID: ${results[i].role_id} \n`);
+                console.log(`Manager ID: ${results[i].manager_id} \n`);
+                console.log(`---------------------------------------------\n`);
+            }
+            appStart();
+        }
+    );
+};
 
 function updateDeparment() {};
 function updateRole() {};
