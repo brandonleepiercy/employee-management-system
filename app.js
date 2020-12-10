@@ -348,6 +348,130 @@ function viewEmployee() {
     );
 };
 
-function updateDeparment() {};
-function updateRole() {};
-function updateEmployee() {};
+function updateDeparment() {
+    connection.query(
+        `SELECT name FROM department;`,
+        function (err, results) {
+            if (err) throw err;
+            choiceArray = [];
+            for (i=0; i<results.length; i++) {
+                choiceArray.push(results[i].name);
+            }
+            inquirer
+                .prompt([
+                    {
+                        type:"list",
+                        name:"choice",
+                        message:"Which department would you like to update?",
+                        choices:choiceArray
+                    },
+                    {
+                        type:"list",
+                        name:"coltochange",
+                        message:"Would you like to edit the index or the name?",
+                        choices:["id","name"]
+                    },
+                    {
+                        type:"input",
+                        name:"newval",
+                        message:"What would you like to change it to?:"
+                    }
+                ]).then(answers => {
+                    connection.query(
+                        `UPDATE department SET ${answers.coltochange} = '${answers.newval}' WHERE name = '${answers.choice}'`,
+                        function (err) {
+                            if (err) throw err;
+                            console.log(`Department ${answers.choice} updated successfully`);
+                            appStart();
+                        }
+                    )
+                })
+        }
+    )
+};
+
+function updateRole() {
+    connection.query(
+        `SELECT title FROM role;`,
+        function (err, results) {
+            if (err) throw err;
+            choiceArray = [];
+            for (i=0; i<results.length; i++) {
+                choiceArray.push(results[i].title);
+            }
+            inquirer
+                .prompt([
+                    {
+                        type:"list",
+                        name:"choice",
+                        message:"Which role would you like to update?",
+                        choices:choiceArray
+                    },
+                    {
+                        type:"list",
+                        name:"coltochange",
+                        message:"What would you like to edit?",
+                        choices:["id","title", "salary", "department_id"]
+                    },
+                    {
+                        type:"input",
+                        name:"newval",
+                        message:"What would you like to change it to?:"
+                    }
+                ]).then(answers => {
+                    connection.query(
+                        `UPDATE role SET ${answers.coltochange} = '${answers.newval}' WHERE title = '${answers.choice}'`,
+                        function (err) {
+                            if (err) throw err;
+                            console.log(`Role ${answers.choice} updated successfully`);
+                            appStart();
+                        }
+                    )
+                })
+        }
+    )
+};
+function updateEmployee() {
+    connection.query(
+        `SELECT * FROM department;`,
+        function (err, results) {
+            if (err) throw err;
+            choiceArray = [];
+            for (i=0; i<results.length; i++) {
+                var nameString = "";
+                nameString += results[i].first_name;
+                nameString += results[i].last_name;
+                choiceArray.push(nameString);
+            }
+            inquirer
+                .prompt([
+                    {
+                        type:"list",
+                        name:"choice",
+                        message:"Which department would you like to update?",
+                        choices:choiceArray
+                    },
+                    {
+                        type:"list",
+                        name:"coltochange",
+                        message:"Would you like to edit the index or the name?",
+                        choices:["id","name"]
+                    },
+                    {
+                        type:"input",
+                        name:"newval",
+                        message:"What would you like to change it to?:"
+                    }
+                ]).then(answers => {
+                    connection.query(
+                        `UPDATE department SET ${answers.coltochange} = '${answers.newval}' WHERE name = '${answers.choice}'`,
+                        function (err) {
+                            if (err) throw err;
+                            console.log(`Department updated successfully`);
+                            appStart();
+                        }
+                    )
+                })
+        }
+    )
+};
