@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
 
-The Employee Management System app is a Command Line Interface application running on Javascript utilizing a MySQL server. The app utilizes a series of inquirer prompts to help the user navigate through the CLI in order to add, view, or update departments, roles, or employess. The inquirer prompts are connected to MySQL tables through connection queries which select, update and insert into the corresponding database. A schema file is provided within this repository which will automatically set up the corresponding SQL database. 
+The Employee Management System app is a Command Line Interface application running on Javascript utilizing a MySQL server. The app utilizes a series of inquirer prompts to help the user navigate through the CLI in order to add, view, or update departments, roles, or employess. The inquirer prompts are connected to MySQL tables through connection queries which select, update and insert into the corresponding database. A schema file is provided within this repository which will automatically set up the corresponding SQL database. The app also uses figlet to generate a splash screen when the program is initialized.
 
 ## Table of Contents
 
@@ -40,7 +40,7 @@ MIT
 
 ## Tests
 
-none yet
+None added yet, will be added in future releases.
 
 ## Questions
 
